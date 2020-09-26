@@ -47,7 +47,7 @@ public class Board{
     return this.computerChoice;
   }
 
-  //user case 3
+  //use case 3
   public void showBoard(){
     //ignoring 0th element of the board
     int offset = 1;
@@ -57,9 +57,22 @@ public class Board{
           System.out.print(" "+board[i*3+j+offset]+" ");
           if(j<2) System.out.print("|"); else System.out.print(" ");
       }
-
       if(i==2) System.out.println(); else System.out.println("\n---+---+---");
     }
+  }
+
+  //use case 4
+  public void makeUserMove(){
+    System.out.println("Please enter the index you want to occupy (choose between 1-9):");
+    Scanner sc = new Scanner(System.in);
+    int temp = sc.nextInt();
+    //Loop until user enters a valid index
+    while(temp<1||temp>9||board[temp]!='-'){
+      System.out.println("\nPlease enter a valid index to occupy (choose between 1-9):");
+      temp = sc.nextInt();
+    }
+    board[temp] = this.getPlayerChoice();
+    this.showBoard();
   }
 
   public static void main(String[] args){
@@ -68,5 +81,6 @@ public class Board{
       board.inputPlayerChoice();
       System.out.println("\nPlayer Choice: " + board.getPlayerChoice() + " Computer Choice: " + board.getComputerChoice());
       board.showBoard();
+      board.makeUserMove();
   }
 }
