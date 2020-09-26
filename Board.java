@@ -68,7 +68,10 @@ public class Board{
     int temp = sc.nextInt();
     //Loop until user enters a valid index
     while(temp<1||temp>9||board[temp]!='-'){
-      System.out.println("\nPlease enter a valid index to occupy (choose between 1-9):");
+      if(temp<1||temp>9)
+        System.out.println("\nPlease enter a valid index to occupy (choose between 1-9):");
+      else
+        System.out.println("\nPlease enter a valid index to occupy (index you chose is already occupied):");
       temp = sc.nextInt();
     }
     board[temp] = this.getPlayerChoice();
