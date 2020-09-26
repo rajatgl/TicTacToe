@@ -72,7 +72,7 @@ public class Board{
         System.out.println("\nPlease enter a valid index to occupy (choose between 1-9):");
       else
         System.out.println("\nPlease enter a valid index to occupy (index you chose is already occupied):");
-      temp = sc.nextInt();
+      temp=sc.nextInt();
     }
     //Place the user choice on the board
     placeUserMove(temp);
@@ -81,7 +81,38 @@ public class Board{
 
   //use case 5
   public void placeUserMove(int index){
-    board[index] = this.getPlayerChoice();
+    board[index]=this.getPlayerChoice();
+  }
+
+  //use case 6
+  public void startGame(){
+    int userChoice=chooseTossOutcome();
+    int tossValue=toss();
+    if(tossValue==userChoice){
+      //User won the toss. Play him first.
+      System.out.println("\nGreat! You won the toss.");
+      makeUserMove();
+    }
+    else{
+      System.out.println("\nOops, you lost the toss. Computer should play first.");
+    }
+  }
+
+  public int chooseTossOutcome(){
+    System.out.println("TIME FOR TOSS! Please choose HEAD or TAIL. Enter 1 for HEAD and 2 for TAIL.");
+    Scanner sc=new Scanner(System.in);
+    int temp=sc.nextInt();
+    while(temp!=1&&temp!=2){
+      System.out.println("Please choose HEAD or TAIL. Enter 1 for HEAD and 2 for TAIL.");
+      temp=sc.nextInt();
+    }
+    return temp;
+  }
+
+  public int toss(){
+    Random random = new Random();
+    //1 for HEAD and 2 for TAIL
+    return random.nextInt()%2+1;
   }
 
   public static void main(String[] args){
@@ -90,6 +121,6 @@ public class Board{
       board.inputPlayerChoice();
       System.out.println("\nPlayer Choice: " + board.getPlayerChoice() + " Computer Choice: " + board.getComputerChoice());
       board.showBoard();
-      board.makeUserMove();
+      board.startGame();
   }
 }
