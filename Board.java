@@ -74,8 +74,14 @@ public class Board{
         System.out.println("\nPlease enter a valid index to occupy (index you chose is already occupied):");
       temp = sc.nextInt();
     }
-    board[temp] = this.getPlayerChoice();
+    //Place the user choice on the board
+    placeUserMove(temp);
     this.showBoard();
+  }
+
+  //use case 5
+  public void placeUserMove(int index){
+    board[index] = this.getPlayerChoice();
   }
 
   public static void main(String[] args){
