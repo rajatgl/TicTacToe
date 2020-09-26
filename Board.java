@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.*;
 public class Board{
   private char[] board;
-  private final int BOARD_SIZE = 3;
-
   //Player Letter Choices
   private char playerChoice;
   private char computerChoice;
@@ -57,7 +55,7 @@ public class Board{
           System.out.print(" "+board[i*3+j+offset]+" ");
           if(j<2) System.out.print("|"); else System.out.print(" ");
       }
-      if(i==2) System.out.println(); else System.out.println("\n---+---+---");
+      if(i<2) System.out.println("\n---+---+---"); else System.out.println();
     }
   }
 
@@ -95,11 +93,12 @@ public class Board{
     }
     else{
       System.out.println("\nOops, you lost the toss. Computer should play first.");
+      makeComputerMove();
     }
   }
 
   public int chooseTossOutcome(){
-    System.out.println("TIME FOR TOSS! Please choose HEAD or TAIL. Enter 1 for HEAD and 2 for TAIL.");
+    System.out.println("\nTIME FOR TOSS! Please choose HEAD or TAIL. Enter 1 for HEAD and 2 for TAIL.");
     Scanner sc=new Scanner(System.in);
     int temp=sc.nextInt();
     while(temp!=1&&temp!=2){
@@ -113,6 +112,20 @@ public class Board{
     Random random = new Random();
     //1 for HEAD and 2 for TAIL
     return random.nextInt()%2+1;
+  }
+
+  //use case 7
+  public void makeComputerMove(){
+    int choice = new Random().nextInt()%9+1;
+    while(board[choice]!='-'){
+      choice = new Random().nextInt()%9+1;
+    }
+    placeComputerMove(choice);
+    this.showBoard();
+  }
+
+  public void placeComputerMove(int index){
+    board[index]=this.getComputerChoice();
   }
 
   public static void main(String[] args){
